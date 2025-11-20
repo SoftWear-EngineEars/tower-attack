@@ -1,12 +1,18 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Monster", menuName = "Scriptable Objects/Monster")]
-public class Monster : ScriptableObject
+public class Monster : Entity
 {
-    private Tier _tier;
-
-    private int _health;
-    private int _damage;
 
     private Sprite _sprite; // make it set automatically based on _tier when sprites are in
+
+    protected override void Awake()
+    {
+        if (_tier == Tier.X)
+        {
+            _tier = Tier.IV;
+        }
+
+        base.Awake();
+    }
 }

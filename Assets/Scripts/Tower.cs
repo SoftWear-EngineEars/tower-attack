@@ -1,13 +1,8 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Tower", menuName = "Scriptable Objects/Tower")]
-public class Tower : ScriptableObject
+public class Tower : Entity
 {
-    private Tier _tier;
-    
-    private int _damage;
-    private int _health;
-    private int _range;
+    [SerializeField] private int _range;
 
-    private Sprite _sprite; // make it set automatically based on _tier when sprites are in
 }
