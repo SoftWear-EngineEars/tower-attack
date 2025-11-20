@@ -1,8 +1,20 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Tower", menuName = "Scriptable Objects/Tower")]
-public class Tower : Entity
+public class Tower : MonoBehaviour
 {
-    [SerializeField] private int _range;
+    [SerializeField] private TowerData towerData;
 
+    private SpriteRenderer _spriteRenderer;
+    
+    void Start()
+    {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteRenderer.sprite = towerData.LoadSprite();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
 }

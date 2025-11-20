@@ -1,18 +1,20 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Monster", menuName = "Scriptable Objects/Monster")]
-public class Monster : Entity
+public class Monster : MonoBehaviour
 {
+    [SerializeField] private MonsterData monsterData;
 
-    private Sprite _sprite; // make it set automatically based on _tier when sprites are in
-
-    protected override void Awake()
+    private SpriteRenderer _spriteRenderer;
+    
+    void Start()
     {
-        if (_tier == Tier.X)
-        {
-            _tier = Tier.IV;
-        }
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteRenderer.sprite = monsterData.LoadSprite();
+    }
 
-        base.Awake();
+    
+    void Update()
+    {
+        
     }
 }
