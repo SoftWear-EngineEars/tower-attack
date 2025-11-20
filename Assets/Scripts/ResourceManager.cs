@@ -5,7 +5,7 @@ public class ResourceManager : MonoBehaviour
 
     public static ResourceManager Instance { get; private set; }
 
-    public int Gold { get; private set; }
+    public int Gold { get; private set; } = 0;
 
     private void Awake()
     {
