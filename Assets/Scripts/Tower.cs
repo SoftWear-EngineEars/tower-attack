@@ -8,13 +8,19 @@ public class Tower : MonoBehaviour
     
     void Start()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _spriteRenderer.sprite = towerData.LoadSprite();
+
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void Initialize(TowerData data)
+    {
+        towerData = data;
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteRenderer.sprite = towerData.LoadSprite();
     }
 }
