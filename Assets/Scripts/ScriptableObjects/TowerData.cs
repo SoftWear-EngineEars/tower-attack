@@ -4,6 +4,7 @@ using UnityEngine;
 public class TowerData : EntityData
 {
     public int range;
+    public int goldValue;
 
     public override Sprite LoadSprite()
     {
