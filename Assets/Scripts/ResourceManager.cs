@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class ResourceManager : MonoBehaviour
 {
@@ -6,6 +7,9 @@ public class ResourceManager : MonoBehaviour
     public static ResourceManager Instance { get; private set; }
 
     public int Gold { get; private set; } = 0;
+    
+    [SerializeField]
+    private int goldPerSecond = 1;
 
     private void Awake()
     {
@@ -23,7 +27,7 @@ public class ResourceManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        StartCoroutine(IncrementGoldOverTime());
     }
 
     // Update is called once per frame
@@ -47,6 +51,15 @@ public class ResourceManager : MonoBehaviour
         else
         {
             return false;
+        }
+    }
+
+    IEnumerator IncrementGoldOverTime()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f / goldPerSecond);
+            GainGold(1);
         }
     }
 }
