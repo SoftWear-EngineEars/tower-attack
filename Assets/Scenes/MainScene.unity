@@ -1370,6 +1370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f5e2c95e1adf543bd56cf33c990d07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ResourceManager
+  goldPerSecond: 1
 --- !u!4 &969577365
 Transform:
   m_ObjectHideFlags: 0
