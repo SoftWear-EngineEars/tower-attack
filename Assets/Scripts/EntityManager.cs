@@ -28,9 +28,9 @@ public class EntityManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // Example of spawning a monster and a tower
-        SpawnMonster(Tier.IV, new Vector3(0, 0, 0));
-        SpawnTower(Tier.X, new Vector3(2, 0, 0));
+        // // Example of spawning a monster and a tower
+        // SpawnMonster(Tier.IV, new Vector3(0, 0, 0));
+        // SpawnTower(Tier.X, new Vector3(2, 0, 0));
     }
 
     // Update is called once per frame
