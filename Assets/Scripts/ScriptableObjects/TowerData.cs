@@ -4,9 +4,10 @@ using UnityEngine;
 public class TowerData : EntityData
 {
     public int range;
+    public int goldValue;
 
-    public override Sprite LoadSprite()
+    public Sprite LoadSprite()
     {
-        return Resources.Load<Sprite>("Sprites/Towers/Tower" + ((int)tier + 1));
+        return LoadSprite("Tower");
     }
 }

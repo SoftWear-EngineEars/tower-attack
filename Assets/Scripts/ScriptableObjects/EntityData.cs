@@ -8,5 +8,8 @@ public abstract class EntityData : ScriptableObject
     public int health;
     public int damage;
     
-    public abstract Sprite LoadSprite();
+    protected Sprite LoadSprite(string entityType)
+    {
+        return Resources.Load<Sprite>($"Sprites/{entityType}s/{entityType}{EntityManager.TierToInt(tier)}");
+    }
 }

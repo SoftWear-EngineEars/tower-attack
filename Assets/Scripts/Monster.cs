@@ -8,13 +8,19 @@ public class Monster : MonoBehaviour
     
     void Start()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _spriteRenderer.sprite = monsterData.LoadSprite();
+
     }
 
     
     void Update()
     {
         
+    }
+
+    public void Initialize(MonsterData data)
+    {
+        monsterData = data;
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteRenderer.sprite = monsterData.LoadSprite();
     }
 }
