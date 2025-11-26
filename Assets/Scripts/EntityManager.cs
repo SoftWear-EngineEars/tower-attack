@@ -28,9 +28,16 @@ public class EntityManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // // Example of spawning a monster and a tower
-        // SpawnMonster(Tier.IV, new Vector3(0, 0, 0));
-        // SpawnTower(Tier.X, new Vector3(2, 0, 0));
+        // // Example of spawning and destroying entities
+        // System.Collections.IEnumerator SpawnAndDestroyEntities()
+        // {
+        //     GameObject monster = SpawnMonster(Tier.IV, new Vector3(0, 0, 0));
+        //     GameObject tower = SpawnTower(Tier.X, new Vector3(2, 0, 0));
+        //     yield return new WaitForSeconds(5f);
+        //     DestroyMonster(monster);
+        //     DestroyTower(tower);
+        // }
+        // StartCoroutine(SpawnAndDestroyEntities());
     }
 
     // Update is called once per frame
@@ -39,22 +46,38 @@ public class EntityManager : MonoBehaviour
 
     }
 
-    public void SpawnMonster(Tier tier, Vector3 position)
+    public GameObject SpawnMonster(Tier tier, Vector3 position)
     {
         GameObject monster = Instantiate(monsterPrefab, position, Quaternion.identity);
         MonsterData monsterData = Resources.Load<MonsterData>($"{scriptableObjectFolder}/Monster{TierToInt(tier)}");
         monster.GetComponent<Monster>().Initialize(monsterData);
+        return monster;
     }
 
-    public void SpawnTower(Tier tier, Vector3 position)
+    public GameObject SpawnTower(Tier tier, Vector3 position)
     {
         GameObject tower = Instantiate(towerPrefab, position, Quaternion.identity);
         TowerData towerData = Resources.Load<TowerData>($"{scriptableObjectFolder}/Tower{TierToInt(tier)}");
         tower.GetComponent<Tower>().Initialize(towerData);
+        return tower;
+    }
+
+    public void DestroyMonster(GameObject monster)
+    {
+        // Optional: Add nice death effect with coroutine
+        Destroy(monster);
+    }
+
+    public void DestroyTower(GameObject tower)
+    {
+        int goldValue = tower.GetComponent<Tower>().GetGoldValue();
+        ResourceManager.Instance.GainGold(goldValue);
+        // Optional: Add nice death effect with coroutine
+        Destroy(tower);
     }
 
     public static int TierToInt(Tier tier)
     {
-        return ((int) tier) + 1;
+        return ((int)tier) + 1;
     }
 }

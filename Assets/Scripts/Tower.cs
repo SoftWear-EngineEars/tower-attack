@@ -23,4 +23,9 @@ public class Tower : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.sprite = towerData.LoadSprite();
     }
+
+    public int GetGoldValue()
+    {
+        return towerData.goldValue;
+    }
 }

@@ -54,7 +54,7 @@ public class ResourceManager : MonoBehaviour
         }
     }
 
-    IEnumerator IncrementGoldOverTime()
+    private IEnumerator IncrementGoldOverTime()
     {
         while (true)
         {
