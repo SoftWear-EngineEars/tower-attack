@@ -31,8 +31,8 @@ public class EntityManager : MonoBehaviour
         // // Example of spawning and destroying entities
         // System.Collections.IEnumerator SpawnAndDestroyEntities()
         // {
-        GameObject monster = SpawnMonster(Tier.IV, new Vector3(0, 0, 0));
-        GameObject tower = SpawnTower(Tier.X, new Vector3(2, 0, 0));
+        // GameObject monster = SpawnMonster(Tier.IV, new Vector3(0, 0, 0));
+        GameObject tower = SpawnTower(Tier.X, new Vector3(1, 0, 0));
         //     yield return new WaitForSeconds(5f);
         //     DestroyMonster(monster);
         //     DestroyTower(tower);
