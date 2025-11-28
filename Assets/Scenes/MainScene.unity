@@ -194,50 +194,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 48731786}
   m_CullTransparentMesh: 1
---- !u!1 &55558428
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 55558430}
-  - component: {fileID: 55558429}
-  m_Layer: 0
-  m_Name: PlayerInteractionManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &55558429
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 55558428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bc6c1eba06043f4dacb307a87f8edf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractionManager
---- !u!4 &55558430
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 55558428}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &160358025
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,7 +522,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 55558429}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerInteractionManager, Assembly-CSharp
         m_MethodName: OnMonsterToggleSelected
         m_Mode: 2
@@ -1420,8 +1376,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 969577365}
+  - component: {fileID: 969577368}
   - component: {fileID: 969577364}
   - component: {fileID: 969577366}
+  - component: {fileID: 969577367}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -1469,6 +1427,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fcc4fae6481c6144930733d59c47c1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EntityManager
+--- !u!114 &969577367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 969577363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bc6c1eba06043f4dacb307a87f8edf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractionManager
+--- !u!114 &969577368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 969577363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcabf34740a716e439c36bb8c57581d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  currentMaxTowerSpawnTier: 0
+  towerSpawnTierLimit: 2
+  towerTierIncreaseInterval:
+    Min: 20
+    Max: 25
+  towerSpawnInterval:
+    Min: 5
+    Max: 10
+  xSpawnRange:
+    Min: -7
+    Max: 7
+  ySpawnRange:
+    Min: -3
+    Max: 2.5
 --- !u!1 &1090164984
 GameObject:
   m_ObjectHideFlags: 0
@@ -2282,7 +2278,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 55558429}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerInteractionManager, Assembly-CSharp
         m_MethodName: OnMonsterToggleSelected
         m_Mode: 2
@@ -2496,7 +2492,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 55558429}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerInteractionManager, Assembly-CSharp
         m_MethodName: OnMonsterToggleSelected
         m_Mode: 2
@@ -2682,7 +2678,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 55558429}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerInteractionManager, Assembly-CSharp
         m_MethodName: OnMonsterToggleSelected
         m_Mode: 2
@@ -2854,4 +2850,3 @@ SceneRoots:
   - {fileID: 1522906535}
   - {fileID: 260320579}
   - {fileID: 969577365}
-  - {fileID: 55558430}
