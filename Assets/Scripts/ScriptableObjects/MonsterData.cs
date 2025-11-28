@@ -5,6 +5,7 @@ public class MonsterData : EntityData
 {
 
     public int cost;
+    public float speed;
     public Sprite LoadSprite()
     {
         return LoadSprite("Monster");
