@@ -12,6 +12,7 @@ public class PlayerInteractionManager : MonoBehaviour
         // Ensure a mouse is connected
         if (Mouse.current == null)
         {
+            Debug.Log("Mouse missing!");
             return;
         }
 
