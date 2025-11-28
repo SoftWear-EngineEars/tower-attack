@@ -28,16 +28,7 @@ public class EntityManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // // Example of spawning and destroying entities
-        // System.Collections.IEnumerator SpawnAndDestroyEntities()
-        // {
-        // GameObject monster = SpawnMonster(Tier.IV, new Vector3(0, 0, 0));
-        GameObject tower = SpawnTower(Tier.X, new Vector3(1, 0, 0));
-        //     yield return new WaitForSeconds(5f);
-        //     DestroyMonster(monster);
-        //     DestroyTower(tower);
-        // }
-        // StartCoroutine(SpawnAndDestroyEntities());
+        
     }
 
     // Update is called once per frame
@@ -79,5 +70,10 @@ public class EntityManager : MonoBehaviour
     public static int TierToInt(Tier tier)
     {
         return ((int)tier) + 1;
+    }
+
+    public static Tier IncrementTier(Tier tier)
+    {
+        return (Tier)((int)tier + 1);
     }
 }
