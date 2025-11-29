@@ -5,6 +5,7 @@ public class TowerData : EntityData
 {
     public int range;
     public int goldValue;
+    [Tooltip("Shots per second")] public float fireSpeed;
 
     public Sprite LoadSprite()
     {
