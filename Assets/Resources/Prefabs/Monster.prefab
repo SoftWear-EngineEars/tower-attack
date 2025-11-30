@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f272d44f0ca5749b02ce231e0bded5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Monster
-  monsterData: {fileID: 0}
   towerCheckRate: 0.75
+  damageDelay: 0.5
 --- !u!212 &3136259899675266293
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -136,7 +136,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
