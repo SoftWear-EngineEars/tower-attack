@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Monster1
   m_EditorClassIdentifier: Assembly-CSharp::MonsterData
   tier: 0
-  health: 0
+  health: 15
   damage: 0
   cost: 5
   speed: 0.33

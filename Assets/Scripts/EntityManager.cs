@@ -53,12 +53,6 @@ public class EntityManager : MonoBehaviour
         return tower;
     }
 
-    public void DestroyMonster(GameObject monster)
-    {
-        // Optional: Add nice death effect with coroutine
-        Destroy(monster);
-    }
-
     public void DestroyTower(GameObject tower)
     {
         int goldValue = tower.GetComponent<Tower>().GetGoldValue();
