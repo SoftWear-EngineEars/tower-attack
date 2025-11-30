@@ -10,11 +10,12 @@ public class Bullet : MonoBehaviour
         _damage = damage;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Monster"))
             return;
         
         other.GetComponent<Monster>().Damage(_damage);
+        Destroy(gameObject);
     }
 }
