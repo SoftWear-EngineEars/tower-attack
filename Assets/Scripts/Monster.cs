@@ -20,7 +20,9 @@ public class Monster : MonoBehaviour
     
     void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, _targetPosition, monsterData.speed * Time.deltaTime);
+        var newPosition = Vector2.MoveTowards(transform.position, _targetPosition, monsterData.speed * Time.deltaTime);
+        if (Vector2.Distance(newPosition, _targetPosition) != 0) // we don't move to the same position as the tower, otherwise the tower can't shoot us. That would be unfair.
+            transform.position = newPosition;
     }
 
     public void Initialize(MonsterData data)
