@@ -8,10 +8,13 @@ public class Tower : MonoBehaviour
     [SerializeField] private float bulletSpeed;
     private TowerData _towerData;
 
+    private int _health;
+
     private SpriteRenderer _spriteRenderer;
 
     void Start()
     {
+        _health = _towerData.health;
         StartCoroutine(Shoot());
     }
 
@@ -61,6 +64,15 @@ public class Tower : MonoBehaviour
             }
 
             yield return new WaitForSeconds(1.0f / _towerData.fireSpeed);
+        }
+    }
+    
+    public void Damage(int health)
+    {
+        _health -= health;
+        if (_health <= 0)
+        {
+            EntityManager.Instance.DestroyTower(gameObject);
         }
     }
 }
