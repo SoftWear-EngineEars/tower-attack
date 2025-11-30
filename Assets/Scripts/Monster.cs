@@ -8,17 +8,21 @@ public class Monster : MonoBehaviour
 
     private SpriteRenderer _spriteRenderer;
 
+    private int _health;
     private Vector2 _targetPosition;
     
     void Start()
     {
+        _health = monsterData.health;
         StartCoroutine(FindTarget());
     }
 
     
     void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, _targetPosition, monsterData.speed * Time.deltaTime);
+        var newPosition = Vector2.MoveTowards(transform.position, _targetPosition, monsterData.speed * Time.deltaTime);
+        if (Vector2.Distance(newPosition, _targetPosition) != 0) // we don't move to the same position as the tower, otherwise the tower can't shoot us. That would be unfair.
+            transform.position = newPosition;
     }
 
     public void Initialize(MonsterData data)
@@ -48,5 +52,12 @@ public class Monster : MonoBehaviour
 
             yield return new WaitForSeconds(towerCheckRate); 
         }
+    }
+
+    public void Damage(int health)
+    {
+        _health -= health;
+        if (_health <= 0)
+            Destroy(gameObject);
     }
 }
