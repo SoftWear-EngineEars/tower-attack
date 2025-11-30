@@ -8,10 +8,12 @@ public class Monster : MonoBehaviour
 
     private SpriteRenderer _spriteRenderer;
 
+    private int _health;
     private Vector2 _targetPosition;
     
     void Start()
     {
+        _health = monsterData.health;
         StartCoroutine(FindTarget());
     }
 
@@ -48,5 +50,12 @@ public class Monster : MonoBehaviour
 
             yield return new WaitForSeconds(towerCheckRate); 
         }
+    }
+
+    public void Damage(int health)
+    {
+        _health -= health;
+        if (_health <= 0)
+            Destroy(gameObject);
     }
 }
