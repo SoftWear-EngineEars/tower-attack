@@ -1,5 +1,6 @@
 // HealthSystem.cs
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,10 +10,14 @@ public class HealthSystem : MonoBehaviour
     [SerializeField] private GameObject healthBarPrefab; // Slider goes here
     [SerializeField] private Vector3 offset = new(0, 1.2f, 0); // manual offset for health bar position in prefab
 
+    [Header("Damage Animation Settings")]
+    [SerializeField] private float flashDuration = 0.5f; // Duration of the red flash
+
     private float _maxHealth;
     private float _currentHealth;
     private Slider _healthBarSlider;
     private Transform _canvasTransform;
+    private SpriteRenderer _spriteRenderer; // Reference to the SpriteRenderer
 
     public event Action OnDeath;
 
@@ -24,6 +29,7 @@ public class HealthSystem : MonoBehaviour
         _healthBarSlider = healthBarInstance.GetComponent<Slider>();
         UpdateHealthBarValue();
         UpdateHealthBarPosition();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void LateUpdate() // Tech
@@ -53,10 +59,36 @@ public class HealthSystem : MonoBehaviour
 
         UpdateHealthBarValue();
 
+        if (_spriteRenderer != null)
+        {
+            StartCoroutine(FlashRed()); // Trigger the fade effect
+        }
+
         if (_currentHealth <= 0)
         {
             OnDeath?.Invoke();
         }
+    }
+
+    private IEnumerator FlashRed()
+    {
+        if (_spriteRenderer == null)
+            yield break;
+
+        var originalColor = _spriteRenderer.color;
+        _spriteRenderer.color = Color.red; // Turn red instantly
+
+        float fadeDuration = flashDuration; // Duration of the fade
+        float elapsedTime = 0f;
+
+        while (elapsedTime < fadeDuration)
+        {
+            _spriteRenderer.color = Color.Lerp(Color.red, originalColor, elapsedTime / fadeDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        _spriteRenderer.color = originalColor; // Ensure it ends at the original color
     }
 
     private void UpdateHealthBarPosition()
