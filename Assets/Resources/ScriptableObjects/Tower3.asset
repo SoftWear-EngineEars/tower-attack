@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Tower3
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
   tier: 2
-  health: 0
-  damage: 50
+  health: 60
+  damage: 30
   range: 3
   goldValue: 0
   fireSpeed: 1
+  isFinalTower: 0

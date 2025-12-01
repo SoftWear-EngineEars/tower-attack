@@ -896,7 +896,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 500
+  m_text: 350
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1399,7 +1399,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f5e2c95e1adf543bd56cf33c990d07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ResourceManager
-  goldPerSecond: 1
+  goldPerSecond: 10
 --- !u!4 &969577365
 Transform:
   m_ObjectHideFlags: 0
@@ -1451,11 +1451,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcabf34740a716e439c36bb8c57581d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  currentMaxTowerSpawnTier: 0
   towerSpawnTierLimit: 2
   towerTierIncreaseInterval:
-    Min: 20
-    Max: 25
+    Min: 35
+    Max: 40
   towerSpawnInterval:
     Min: 5
     Max: 10
@@ -1463,7 +1462,7 @@ MonoBehaviour:
     Min: -7
     Max: 7
   ySpawnRange:
-    Min: -3
+    Min: -2.2
     Max: 2.5
 --- !u!1 &1090164984
 GameObject:
@@ -1597,7 +1596,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 5
+  m_text: 25
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

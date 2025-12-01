@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tower5
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
   tier: 4
-  health: 0
+  health: 300
   damage: 1000
   range: 1
   goldValue: 0
