@@ -7,7 +7,7 @@ public class MonsterToggleButton : MonoBehaviour
     public Tier monsterTier;
     private Toggle _toggle;
 
-    void Awake()
+    private void Awake()
     {
         _toggle = GetComponent<Toggle>();
     }
