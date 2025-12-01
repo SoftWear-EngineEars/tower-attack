@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Range xSpawnRange = new(-7f, 7f);
     [SerializeField] private Range ySpawnRange = new(-3f, 2.5f);
     private List<Tier> _availableTowerTiers;
+    private Coroutine _spawningCoroutine;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
@@ -43,15 +44,16 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    // making sure the OnSceneLoaded veriable works with Unity
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        Debug.Log("Scene loaded: " + scene.name + " in mode: " + mode);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (mainTower == null && _spawningCoroutine != null)
+        if (_mainTower == null && _spawningCoroutine != null)
         {
             StopCoroutine(_spawningCoroutine);
             _spawningCoroutine = null;
