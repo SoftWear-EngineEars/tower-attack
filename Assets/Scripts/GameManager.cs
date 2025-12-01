@@ -18,20 +18,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private GameObject mainTower;
+    private GameObject _mainTower;
     [SerializeField] private Tier currentMaxTowerSpawnTier = Tier.I;
     [SerializeField] private Tier towerSpawnTierLimit = Tier.III;
     [SerializeField] private Range towerTierIncreaseInterval = new Range(50f, 100f);
     [SerializeField] private Range towerSpawnInterval = new Range(20f, 40f);
     [SerializeField] private Range xSpawnRange = new Range(-7f, 7f);
     [SerializeField] private Range ySpawnRange = new Range(-3f, 2.5f);
-    private List<Tier> availableTowerTiers;
+    private List<Tier> _availableTowerTiers;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        availableTowerTiers = new List<Tier> { currentMaxTowerSpawnTier };
-        mainTower = EntityManager.Instance.SpawnTower(Tier.X, new Vector3(0, 0, 0));
+        _availableTowerTiers = new List<Tier> { currentMaxTowerSpawnTier };
+        _mainTower = EntityManager.Instance.SpawnTower(Tier.X, new Vector3(0, 0, 0));
         StartCoroutine(GraduallyIncreaseTowerTierLimit());
         StartCoroutine(RandomlySpawnTowers());
     }
@@ -50,13 +50,13 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(randomInterval);
 
             currentMaxTowerSpawnTier = EntityManager.IncrementTier(currentMaxTowerSpawnTier);
-            availableTowerTiers.Add(currentMaxTowerSpawnTier);
+            _availableTowerTiers.Add(currentMaxTowerSpawnTier);
         }
     }
 
     private IEnumerator RandomlySpawnTowers()
     {
-        while (mainTower != null)
+        while (_mainTower != null)
         {
             float randomInterval = Random.Range(towerSpawnInterval.Min, towerSpawnInterval.Max);
             yield return new WaitForSeconds(randomInterval);
@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
     private Tier GetWeightedRandomTowerTier()
     {
         // Calculate weights as powers of 2
-        int count = availableTowerTiers.Count;
+        int count = _availableTowerTiers.Count;
         float totalWeight = Mathf.Pow(2, count) - 1; // Sum of 2^0 + 2^1 + ... + 2^(count-1)
 
         // Generate a random value
@@ -81,12 +81,12 @@ public class GameManager : MonoBehaviour
             cumulativeWeight += Mathf.Pow(2, i);
             if (randomValue < cumulativeWeight)
             {
-                return availableTowerTiers[i];
+                return _availableTowerTiers[i];
             }
         }
 
         // Fallback (should not happen)
-        return availableTowerTiers[0];
+        return _availableTowerTiers[0];
     }
 
     private Vector3 GetRandomSpawnPosition()

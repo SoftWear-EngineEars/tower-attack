@@ -5,9 +5,9 @@ public class EntityManager : MonoBehaviour
 
     public static EntityManager Instance { get; private set; }
 
-    private GameObject monsterPrefab;
-    private GameObject towerPrefab;
-    private string scriptableObjectFolder = "ScriptableObjects";
+    private GameObject _monsterPrefab;
+    private GameObject _towerPrefab;
+    private const string ScriptableObjectFolder = "ScriptableObjects";
 
     private void Awake()
     {
@@ -21,8 +21,8 @@ public class EntityManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
 
-        monsterPrefab = Resources.Load<GameObject>("Prefabs/Monster");
-        towerPrefab = Resources.Load<GameObject>("Prefabs/Tower");
+        _monsterPrefab = Resources.Load<GameObject>("Prefabs/Monster");
+        _towerPrefab = Resources.Load<GameObject>("Prefabs/Tower");
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -39,16 +39,16 @@ public class EntityManager : MonoBehaviour
 
     public GameObject SpawnMonster(Tier tier, Vector3 position)
     {
-        GameObject monster = Instantiate(monsterPrefab, position, Quaternion.identity);
-        MonsterData monsterData = Resources.Load<MonsterData>($"{scriptableObjectFolder}/Monster{TierToInt(tier)}");
+        GameObject monster = Instantiate(_monsterPrefab, position, Quaternion.identity);
+        MonsterData monsterData = Resources.Load<MonsterData>($"{ScriptableObjectFolder}/Monster{TierToInt(tier)}");
         monster.GetComponent<Monster>().Initialize(monsterData);
         return monster;
     }
 
     public GameObject SpawnTower(Tier tier, Vector3 position)
     {
-        GameObject tower = Instantiate(towerPrefab, position, Quaternion.identity);
-        TowerData towerData = Resources.Load<TowerData>($"{scriptableObjectFolder}/Tower{TierToInt(tier)}");
+        GameObject tower = Instantiate(_towerPrefab, position, Quaternion.identity);
+        TowerData towerData = Resources.Load<TowerData>($"{ScriptableObjectFolder}/Tower{TierToInt(tier)}");
         tower.GetComponent<Tower>().Initialize(towerData);
         return tower;
     }

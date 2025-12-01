@@ -15,14 +15,12 @@ public class Monster : MonoBehaviour
     private MonsterData _monsterData;
     
     private SpriteRenderer _spriteRenderer;
-    private PolygonCollider2D _collider;
 
     private int _health;
     private GameObject _targetTower;
     
     void Start()
     {
-        _collider = GetComponent<PolygonCollider2D>();
         _health = _monsterData.health;
         StartCoroutine(FindTarget());
         StartCoroutine(AttackTower());
