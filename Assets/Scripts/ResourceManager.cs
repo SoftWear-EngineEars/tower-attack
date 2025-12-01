@@ -28,6 +28,11 @@ public class ResourceManager : MonoBehaviour
     {
         StartCoroutine(IncrementGoldOverTime());
     }
+    
+    public void ResetState()
+    {
+        Gold = 0;
+    }
 
     public void GainGold(int amount)
     {

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6730608036803477855}
   - component: {fileID: 3136259899675266293}
   - component: {fileID: 6281592009750545053}
+  - component: {fileID: 904646405931274400}
   m_Layer: 0
   m_Name: Monster
   m_TagString: Monster
@@ -48,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Monster
   towerCheckRate: 0.75
   damageDelay: 0.5
+  reach: 1.5
 --- !u!212 &3136259899675266293
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -156,3 +158,17 @@ PolygonCollider2D:
       - {x: 1.9404944, y: -1.2999928}
       - {x: 0.10216296, y: 1.3530121}
   m_UseDelaunayMesh: 0
+--- !u!114 &904646405931274400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1308838602858160029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb114531e1e2e564ab1b89c609a8de7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthSystem
+  healthBarPrefab: {fileID: 12557455549121897, guid: cd837a3163efcab4fb9425b496bef09f, type: 3}
+  offset: {x: 0, y: 0.5, z: 0}

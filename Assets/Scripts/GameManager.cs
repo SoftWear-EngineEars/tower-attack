@@ -1,6 +1,9 @@
+using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -32,7 +35,27 @@ public class GameManager : MonoBehaviour
         _availableTowerTiers = new List<Tier> { currentMaxTowerSpawnTier };
         _mainTower = EntityManager.Instance.SpawnTower(Tier.X, new Vector3(0, 0, 0));
         StartCoroutine(GraduallyIncreaseTowerTierLimit());
-        StartCoroutine(RandomlySpawnTowers());
+        _spawningCoroutine = StartCoroutine(RandomlySpawnTowers());
+    }
+    
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (mainTower == null && _spawningCoroutine != null)
+        {
+            StopCoroutine(_spawningCoroutine);
+            _spawningCoroutine = null;
+        }
     }
 
     private IEnumerator GraduallyIncreaseTowerTierLimit()

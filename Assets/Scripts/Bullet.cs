@@ -15,7 +15,7 @@ public class Bullet : MonoBehaviour
         if (!other.CompareTag("Monster"))
             return;
         
-        other.GetComponent<Monster>().Damage(_damage);
+        other.GetComponent<HealthSystem>()?.TakeDamage(_damage);
         Destroy(gameObject);
     }
 }

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EntityManager : MonoBehaviour
@@ -47,6 +49,25 @@ public class EntityManager : MonoBehaviour
         ResourceManager.Instance.GainGold(goldValue);
         // Optional: Add nice death effect with coroutine
         Destroy(tower);
+    }
+    
+    public void ResetState() // If you win the game and want to go back you gotta reset the state of the entities
+    {
+        foreach (var tower in GameObject.FindGameObjectsWithTag("Tower"))
+        {
+            if (tower != null)
+            {
+                Destroy(tower);
+            }
+        }
+
+        foreach (var monster in GameObject.FindGameObjectsWithTag("Monster"))
+        {
+            if (monster != null)
+            {
+                Destroy(monster);
+            }
+        }
     }
 
     public static int TierToInt(Tier tier)
