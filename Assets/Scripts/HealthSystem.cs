@@ -59,15 +59,33 @@ public class HealthSystem : MonoBehaviour
 
         UpdateHealthBarValue();
 
-        if (_spriteRenderer != null)
+        if (_currentHealth <= 0)
+        {
+            PlayDeathAnimation(); // Create a new object for the animation
+            OnDeath?.Invoke(); // Trigger the death event
+        }
+        else if (_spriteRenderer != null)
         {
             StartCoroutine(FlashRed()); // Trigger the fade effect
         }
+    }
 
-        if (_currentHealth <= 0)
-        {
-            OnDeath?.Invoke();
-        }
+    private void PlayDeathAnimation()
+    {
+        if (_spriteRenderer == null)
+            return;
+
+        // Create a new GameObject for the death animation
+        GameObject deathAnimationObject = new GameObject("DeathAnimation");
+        var deathAnimation = deathAnimationObject.AddComponent<DeathAnimation>();
+        deathAnimation.Initialize(
+            _spriteRenderer.sprite,
+            transform.position,
+            transform.localScale,
+            _spriteRenderer.sortingLayerID,
+            _spriteRenderer.sortingOrder,
+            flashDuration
+        );
     }
 
     private IEnumerator FlashRed()
