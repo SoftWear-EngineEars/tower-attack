@@ -3,7 +3,6 @@ using System.Collections;
 
 public class ResourceManager : MonoBehaviour
 {
-
     public static ResourceManager Instance { get; private set; }
 
     public int Gold { get; private set; } = 0;
@@ -25,15 +24,9 @@ public class ResourceManager : MonoBehaviour
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
         StartCoroutine(IncrementGoldOverTime());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void GainGold(int amount)

@@ -6,14 +6,14 @@ public class GoldTextUpdater : MonoBehaviour
     public TextMeshProUGUI goldText;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
         goldText = GetComponent<TextMeshProUGUI>();
         UpdateGoldText();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         UpdateGoldText();
     }

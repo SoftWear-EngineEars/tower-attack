@@ -7,7 +7,7 @@ public class PlayerInteractionManager : MonoBehaviour
     private Tier? _selectedMonsterTier;
     private MonsterData _selectedMonsterData;
 
-    void Update()
+    private void Update()
     {
         // Ensure a mouse is connected
         if (Mouse.current == null)

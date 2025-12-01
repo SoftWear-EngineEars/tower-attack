@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
-
     [System.Serializable]
     private struct Range
     {
@@ -21,14 +20,14 @@ public class GameManager : MonoBehaviour
     private GameObject _mainTower;
     [SerializeField] private Tier currentMaxTowerSpawnTier = Tier.I;
     [SerializeField] private Tier towerSpawnTierLimit = Tier.III;
-    [SerializeField] private Range towerTierIncreaseInterval = new Range(50f, 100f);
-    [SerializeField] private Range towerSpawnInterval = new Range(20f, 40f);
-    [SerializeField] private Range xSpawnRange = new Range(-7f, 7f);
-    [SerializeField] private Range ySpawnRange = new Range(-3f, 2.5f);
+    [SerializeField] private Range towerTierIncreaseInterval = new(50f, 100f);
+    [SerializeField] private Range towerSpawnInterval = new(20f, 40f);
+    [SerializeField] private Range xSpawnRange = new(-7f, 7f);
+    [SerializeField] private Range ySpawnRange = new(-3f, 2.5f);
     private List<Tier> _availableTowerTiers;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
         _availableTowerTiers = new List<Tier> { currentMaxTowerSpawnTier };
         _mainTower = EntityManager.Instance.SpawnTower(Tier.X, new Vector3(0, 0, 0));
@@ -36,17 +35,11 @@ public class GameManager : MonoBehaviour
         StartCoroutine(RandomlySpawnTowers());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     private IEnumerator GraduallyIncreaseTowerTierLimit()
     {
         while (currentMaxTowerSpawnTier < towerSpawnTierLimit)
         {
-            float randomInterval = Random.Range(towerTierIncreaseInterval.Min, towerTierIncreaseInterval.Max);
+            var randomInterval = Random.Range(towerTierIncreaseInterval.Min, towerTierIncreaseInterval.Max);
             yield return new WaitForSeconds(randomInterval);
 
             currentMaxTowerSpawnTier = EntityManager.IncrementTier(currentMaxTowerSpawnTier);
@@ -58,7 +51,7 @@ public class GameManager : MonoBehaviour
     {
         while (_mainTower != null)
         {
-            float randomInterval = Random.Range(towerSpawnInterval.Min, towerSpawnInterval.Max);
+            var randomInterval = Random.Range(towerSpawnInterval.Min, towerSpawnInterval.Max);
             yield return new WaitForSeconds(randomInterval);
             
             EntityManager.Instance.SpawnTower(GetWeightedRandomTowerTier(), GetRandomSpawnPosition());
@@ -68,15 +61,15 @@ public class GameManager : MonoBehaviour
     private Tier GetWeightedRandomTowerTier()
     {
         // Calculate weights as powers of 2
-        int count = _availableTowerTiers.Count;
-        float totalWeight = Mathf.Pow(2, count) - 1; // Sum of 2^0 + 2^1 + ... + 2^(count-1)
+        var count = _availableTowerTiers.Count;
+        var totalWeight = Mathf.Pow(2, count) - 1; // Sum of 2^0 + 2^1 + ... + 2^(count-1)
 
         // Generate a random value
-        float randomValue = Random.Range(0, totalWeight);
+        var randomValue = Random.Range(0, totalWeight);
 
         // Find the corresponding tier
         float cumulativeWeight = 0;
-        for (int i = 0; i < count; i++)
+        for (var i = 0; i < count; i++)
         {
             cumulativeWeight += Mathf.Pow(2, i);
             if (randomValue < cumulativeWeight)
@@ -91,8 +84,8 @@ public class GameManager : MonoBehaviour
 
     private Vector3 GetRandomSpawnPosition()
     {
-        float randomX = Random.Range(xSpawnRange.Min, xSpawnRange.Max);
-        float randomY = Random.Range(ySpawnRange.Min, ySpawnRange.Max);
+        var randomX = Random.Range(xSpawnRange.Min, xSpawnRange.Max);
+        var randomY = Random.Range(ySpawnRange.Min, ySpawnRange.Max);
         return new Vector3(randomX, randomY, 0);
     }
 }

@@ -19,7 +19,7 @@ public class Monster : MonoBehaviour
     private int _health;
     private GameObject _targetTower;
     
-    void Start()
+    private void Start()
     {
         _health = _monsterData.health;
         StartCoroutine(FindTarget());

@@ -12,7 +12,7 @@ public class Tower : MonoBehaviour
 
     private SpriteRenderer _spriteRenderer;
 
-    void Start()
+    private void Start()
     {
         _health = _towerData.health;
         StartCoroutine(Shoot());
@@ -30,7 +30,7 @@ public class Tower : MonoBehaviour
         return _towerData.goldValue;
     }
 
-    Vector3? GetTargetPosition()
+    private Vector3? GetTargetPosition()
     {
         var monsters = GameObject.FindGameObjectsWithTag("Monster");
         var targets = monsters.Where(monster =>
@@ -46,7 +46,7 @@ public class Tower : MonoBehaviour
         return targets[Random.Range(0, targets.Length)].transform.position;
     }
 
-    IEnumerator Shoot()
+    private IEnumerator Shoot()
     {
         while (true)
         {
