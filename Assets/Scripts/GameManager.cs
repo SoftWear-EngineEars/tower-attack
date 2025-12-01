@@ -60,11 +60,12 @@ public class GameManager : MonoBehaviour
     // making sure the OnSceneLoaded veriable works with Unity
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log("Scene loaded: " + scene.name + " in mode: " + mode);
-
         if (scene.name.Equals("MainScene"))
         {
-            InitializeGame();
+            Debug.Log("Scene loaded: " + scene.name + " in mode: " + mode);
+
+            InitializeGame(); // re-initialize game
+            ResourceManager.Instance.ResetState(); // reset gold
         }
     }
 
