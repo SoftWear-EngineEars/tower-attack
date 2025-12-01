@@ -1,20 +1,20 @@
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(HealthSystem))]
 public class Tower : MonoBehaviour
 {
     [SerializeField] private GameObject bullet;
     [SerializeField] private float bulletSpeed;
     private TowerData _towerData;
-
-    private int _health;
+    private HealthSystem _healthSystem;
 
     private SpriteRenderer _spriteRenderer;
 
     void Start()
     {
-        _health = _towerData.health;
         StartCoroutine(Shoot());
     }
 
@@ -23,6 +23,22 @@ public class Tower : MonoBehaviour
         _towerData = data;
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.sprite = _towerData.LoadSprite();
+
+        _healthSystem = GetComponent<HealthSystem>();
+        _healthSystem.Initialize(_towerData.health);
+        _healthSystem.OnDeath += Die;
+    }
+
+    private void Die()
+    {
+        if (_towerData.isFinalTower)
+        {
+            SceneManager.LoadScene("WinScreen");
+        }
+        else
+        {
+            EntityManager.Instance.DestroyTower(gameObject);
+        }
     }
 
     public int GetGoldValue()
@@ -64,15 +80,6 @@ public class Tower : MonoBehaviour
             }
 
             yield return new WaitForSeconds(1.0f / _towerData.fireSpeed);
-        }
-    }
-    
-    public void Damage(int health)
-    {
-        _health -= health;
-        if (_health <= 0)
-        {
-            EntityManager.Instance.DestroyTower(gameObject);
         }
     }
 }

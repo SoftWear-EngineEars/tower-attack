@@ -1,6 +1,9 @@
+using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -26,20 +29,69 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Range xSpawnRange = new Range(-7f, 7f);
     [SerializeField] private Range ySpawnRange = new Range(-3f, 2.5f);
     private List<Tier> availableTowerTiers;
+    
+    private Coroutine _spawningCoroutine; // To prevent towers from spawning in the game over scene
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    } 
+    
+    // Called every time a scene is loaded
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "MainScene")
+        {
+            InitializeGame();
+        }
+    }
+
+     void InitializeGame() // What was in start before
+    {
+        // Stop any previous coroutines just in case
+        if (_spawningCoroutine != null)
+        {
+            StopCoroutine(_spawningCoroutine);
+        }
+        StopAllCoroutines(); 
+
+        // Reset singletons
+        if (EntityManager.Instance != null)
+        {
+            EntityManager.Instance.ResetState();
+        }
+        if (ResourceManager.Instance != null)
+        {
+            ResourceManager.Instance.ResetState();
+        }
+
+        // Initialize game state
+        availableTowerTiers = new List<Tier> { currentMaxTowerSpawnTier };
+        mainTower = EntityManager.Instance.SpawnTower(Tier.X, new Vector3(0, 0, 0));
+        
+        // Start new coroutines
+        StartCoroutine(GraduallyIncreaseTowerTierLimit());
+        _spawningCoroutine = StartCoroutine(RandomlySpawnTowers());
+    }
+    
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        availableTowerTiers = new List<Tier> { currentMaxTowerSpawnTier };
-        mainTower = EntityManager.Instance.SpawnTower(Tier.X, new Vector3(0, 0, 0));
-        StartCoroutine(GraduallyIncreaseTowerTierLimit());
-        StartCoroutine(RandomlySpawnTowers());
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (mainTower == null && _spawningCoroutine != null)
+        {
+            StopCoroutine(_spawningCoroutine);
+            _spawningCoroutine = null;
+        }
     }
 
     private IEnumerator GraduallyIncreaseTowerTierLimit()
