@@ -82,4 +82,9 @@ public class Tower : MonoBehaviour
             yield return new WaitForSeconds(1.0f / _towerData.fireSpeed);
         }
     }
+
+    public bool IsCenterTower()
+    {
+        return _towerData.isFinalTower;
+    }
 }
