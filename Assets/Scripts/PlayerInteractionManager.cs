@@ -8,6 +8,51 @@ public class PlayerInteractionManager : MonoBehaviour
     private Tier? _selectedMonsterTier;
     private MonsterData _selectedMonsterData;
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    // When a scene is loaded, check if it's the MainScene and relink the toggles because the links destroy when you change scenes
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name.Equals("MainScene"))
+        {
+            RebindToggleListeners();
+        }
+    }
+
+    private void RebindToggleListeners()
+    {
+        // Find all the toggles in the newly loaded scene
+        var monsterToggles = FindObjectsOfType<MonsterToggleButton>(true);
+        foreach (var toggleButton in monsterToggles)
+        {
+            var toggle = toggleButton.GetComponent<UnityEngine.UI.Toggle>();
+            if (toggle != null)
+            {
+                toggle.onValueChanged.RemoveAllListeners();
+                toggle.onValueChanged.AddListener((isSelected) => {
+                    if (isSelected)
+                    {
+                        OnMonsterToggleSelected(toggleButton);
+                    }
+                    // Handle case where a toggle is deselected by a ToggleGroup
+                    else if (_selectedMonsterTier == toggleButton.monsterTier)
+                    {
+                        _selectedMonsterTier = null;
+                        _selectedMonsterData = null;
+                    }
+                });
+            }
+        }
+    }
+
     private void Update()
     {
         // Ensure a mouse is connected
@@ -58,8 +103,11 @@ public class PlayerInteractionManager : MonoBehaviour
         }
         else
         {
-            _selectedMonsterTier = null;
-            _selectedMonsterData = null;
+            if (_selectedMonsterTier == button.monsterTier)
+            {
+                _selectedMonsterTier = null;
+                _selectedMonsterData = null;
+            }
         }
     }
 }
