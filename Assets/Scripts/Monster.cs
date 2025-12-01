@@ -83,6 +83,8 @@ public class Monster : MonoBehaviour
             if (IsTouchingTower())
             {
                 _targetTower.GetComponent<HealthSystem>()?.TakeDamage(_monsterData.damage);
+                if (_targetTower.GetComponent<Tower>().IsCenterTower()) 
+                    Destroy(gameObject);
             }
             yield return new WaitForSeconds(damageDelay);
         }
