@@ -16,6 +16,6 @@ MonoBehaviour:
   health: 60
   damage: 30
   range: 3
-  goldValue: 0
+  goldValue: 500
   fireSpeed: 1
   isFinalTower: 0
