@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerInteractionManager : MonoBehaviour
 {
@@ -16,7 +17,15 @@ public class PlayerInteractionManager : MonoBehaviour
             return;
         }
 
-        if (_selectedMonsterTier.HasValue && Mouse.current.leftButton.wasPressedThisFrame)
+        // resetting the selected data if outside of the MainScene
+        if (!SceneManager.GetActiveScene().name.Equals("MainScene") && _selectedMonsterData != null)
+        {
+            _selectedMonsterTier = null;
+            _selectedMonsterData = null;
+        }
+
+        // only runs if in the MainScene, there is a monster selected, and the player clicked
+        if (SceneManager.GetActiveScene().name.Equals("MainScene") && _selectedMonsterTier.HasValue && Mouse.current.leftButton.wasPressedThisFrame)
         {
             if (EventSystem.current.IsPointerOverGameObject())
             {
