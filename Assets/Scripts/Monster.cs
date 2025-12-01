@@ -28,9 +28,13 @@ public class Monster : MonoBehaviour
     {
         if (_targetTower == null) return;
 
-        var newPosition = Vector2.MoveTowards(transform.position, _targetTower.transform.position, _monsterData.speed * Time.deltaTime);
-        if (Vector2.Distance(newPosition, _targetTower.transform.position) != 0)
-            transform.position = newPosition;
+        Vector2 currentPosition2D = transform.position;
+        Vector2 targetPosition2D = _targetTower.transform.position;
+
+        Vector2 newPosition2D = Vector2.MoveTowards(currentPosition2D, targetPosition2D, _monsterData.speed * Time.deltaTime);
+
+        // So that the monsters are above the towers
+        transform.position = new Vector3(newPosition2D.x, newPosition2D.y, transform.position.z);
     }
 
     public void Initialize(MonsterData data)

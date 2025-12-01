@@ -172,3 +172,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HealthSystem
   healthBarPrefab: {fileID: 12557455549121897, guid: cd837a3163efcab4fb9425b496bef09f, type: 3}
   offset: {x: 0, y: 0.5, z: 0}
+  flashDuration: 0.5

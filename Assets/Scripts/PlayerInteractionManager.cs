@@ -81,7 +81,7 @@ public class PlayerInteractionManager : MonoBehaviour
             {
                 Vector2 screenPosition = Mouse.current.position.ReadValue();
                 Vector3 spawnPosition = Camera.main.ScreenToWorldPoint(screenPosition);
-                spawnPosition.z = 0;
+                spawnPosition.z = -1; // Set to -1 so it's above towers
 
                 EntityManager.Instance.SpawnMonster(_selectedMonsterTier.Value, spawnPosition);
             }
