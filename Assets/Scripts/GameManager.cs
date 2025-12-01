@@ -21,24 +21,37 @@ public class GameManager : MonoBehaviour
     }
 
     private GameObject _mainTower;
-    [SerializeField] private Tier currentMaxTowerSpawnTier = Tier.I;
+
     [SerializeField] private Tier towerSpawnTierLimit = Tier.III;
     [SerializeField] private Range towerTierIncreaseInterval = new(50f, 100f);
     [SerializeField] private Range towerSpawnInterval = new(20f, 40f);
     [SerializeField] private Range xSpawnRange = new(-7f, 7f);
     [SerializeField] private Range ySpawnRange = new(-3f, 2.5f);
+
+    private const Tier LowestTowerTier = Tier.I;
+
+    private Tier _currentMaxTowerSpawnTier;
     private List<Tier> _availableTowerTiers;
+
     private Coroutine _spawningCoroutine;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private void Start()
+    private void InitializeGame()
     {
-        _availableTowerTiers = new List<Tier> { currentMaxTowerSpawnTier };
+        _currentMaxTowerSpawnTier = LowestTowerTier;
+        _availableTowerTiers = new List<Tier> { _currentMaxTowerSpawnTier };
         _mainTower = EntityManager.Instance.SpawnTower(Tier.X, new Vector3(0, 0, 0));
         StartCoroutine(GraduallyIncreaseTowerTierLimit());
         _spawningCoroutine = StartCoroutine(RandomlySpawnTowers());
     }
     
+
+
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
     void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
@@ -47,8 +60,17 @@ public class GameManager : MonoBehaviour
     // making sure the OnSceneLoaded veriable works with Unity
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log("Scene loaded: " + scene.name + " in mode: " + mode);
+        if (scene.name.Equals("MainScene"))
+        {
+            Debug.Log("Scene loaded: " + scene.name + " in mode: " + mode);
+
+            InitializeGame(); // re-initialize game
+            ResourceManager.Instance.ResetState(); // reset gold
+        }
     }
+
+
+
 
     // Update is called once per frame
     void Update()
@@ -62,13 +84,13 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator GraduallyIncreaseTowerTierLimit()
     {
-        while (currentMaxTowerSpawnTier < towerSpawnTierLimit)
+        while (_currentMaxTowerSpawnTier < towerSpawnTierLimit)
         {
             var randomInterval = Random.Range(towerTierIncreaseInterval.Min, towerTierIncreaseInterval.Max);
             yield return new WaitForSeconds(randomInterval);
 
-            currentMaxTowerSpawnTier = EntityManager.IncrementTier(currentMaxTowerSpawnTier);
-            _availableTowerTiers.Add(currentMaxTowerSpawnTier);
+            _currentMaxTowerSpawnTier = EntityManager.IncrementTier(_currentMaxTowerSpawnTier);
+            _availableTowerTiers.Add(_currentMaxTowerSpawnTier);
         }
     }
 
