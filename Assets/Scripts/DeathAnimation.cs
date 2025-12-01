@@ -23,7 +23,6 @@ public class DeathAnimation : MonoBehaviour
     {
         _spriteRenderer.color = Color.red; // Start with red
 
-        float fadeDuration = 0.5f;
         float elapsedTime = 0f;
 
         while (elapsedTime < fadeDuration)
