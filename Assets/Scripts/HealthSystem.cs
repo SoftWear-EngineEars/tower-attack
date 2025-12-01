@@ -7,7 +7,7 @@ public class HealthSystem : MonoBehaviour
 {
     [Header("UI Settings")]
     [SerializeField] private GameObject healthBarPrefab; // Slider goes here
-    [SerializeField] private Vector3 offset = new Vector3(0, 1.2f, 0); // manual offset for health bar position in prefab
+    [SerializeField] private Vector3 offset = new(0, 1.2f, 0); // manual offset for health bar position in prefab
 
     private float _maxHealth;
     private float _currentHealth;
@@ -16,24 +16,22 @@ public class HealthSystem : MonoBehaviour
 
     public event Action OnDeath;
 
-    void Start()
+    private void Start()
     {
         // Find the main canvas to parent the health bar to
-        _canvasTransform = FindObjectOfType<Canvas>()?.transform;
-        if (_canvasTransform != null && healthBarPrefab != null)
-        {
-            GameObject healthBarInstance = Instantiate(healthBarPrefab, _canvasTransform);
-            _healthBarSlider = healthBarInstance.GetComponent<Slider>();
-            UpdateHealthBarPosition();
-        }
+        _canvasTransform = FindAnyObjectByType<Canvas>().transform;
+        var healthBarInstance = Instantiate(healthBarPrefab, _canvasTransform);
+        _healthBarSlider = healthBarInstance.GetComponent<Slider>();
+        UpdateHealthBarValue();
+        UpdateHealthBarPosition();
     }
 
-    void LateUpdate() // Tech
+    private void LateUpdate() // Tech
     {
         UpdateHealthBarPosition();
     }
 
-    void OnDestroy()
+    private void OnDestroy()
     {
         // Clean up the health bar when the object is destroyed
         if (_healthBarSlider != null)
@@ -46,7 +44,6 @@ public class HealthSystem : MonoBehaviour
     {
         _maxHealth = maxHealth;
         _currentHealth = maxHealth;
-        UpdateHealthBarValue();
     }
 
     public void TakeDamage(int damage)
@@ -64,19 +61,17 @@ public class HealthSystem : MonoBehaviour
 
     private void UpdateHealthBarPosition()
     {
-        if (_healthBarSlider != null)
-        {
-            Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position + offset);
-            _healthBarSlider.transform.position = screenPos;
-            _healthBarSlider.gameObject.SetActive(screenPos.z > 0);
-        }
+        if (_healthBarSlider == null)
+            return;
+        var screenPos = Camera.main.WorldToScreenPoint(transform.position + offset);
+        _healthBarSlider.transform.position = screenPos;
+        _healthBarSlider.gameObject.SetActive(screenPos.z > 0);
     }
 
     private void UpdateHealthBarValue()
     {
-        if (_healthBarSlider != null)
-        {
-            _healthBarSlider.value = _currentHealth / _maxHealth;
-        }
+        if (_healthBarSlider == null)
+            return;
+        _healthBarSlider.value = _currentHealth / _maxHealth;
     }
 }
