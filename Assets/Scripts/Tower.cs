@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(HealthSystem))]
 public class Tower : MonoBehaviour
@@ -30,7 +31,14 @@ public class Tower : MonoBehaviour
 
     private void Die()
     {
-        EntityManager.Instance.DestroyTower(gameObject);
+        if (_towerData.isFinalTower)
+        {
+            SceneManager.LoadScene("WinScreen");
+        }
+        else
+        {
+            EntityManager.Instance.DestroyTower(gameObject);
+        }
     }
 
     public int GetGoldValue()

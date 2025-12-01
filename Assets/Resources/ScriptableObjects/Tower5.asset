@@ -18,3 +18,4 @@ MonoBehaviour:
   range: 1
   goldValue: 0
   fireSpeed: 0.1
+  isFinalTower: 1
