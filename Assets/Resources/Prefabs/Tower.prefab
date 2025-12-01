@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 949156856268641197}
   - component: {fileID: 6226866736505327700}
   - component: {fileID: -2862888667020890235}
+  - component: {fileID: 7432998982320419738}
+  - component: {fileID: -3684972729061468164}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Tower
@@ -105,3 +107,31 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7432998982320419738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1432272018895342986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb114531e1e2e564ab1b89c609a8de7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthSystem
+  healthBarPrefab: {fileID: 0}
+  offset: {x: 0, y: 1.2, z: 0}
+--- !u!114 &-3684972729061468164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1432272018895342986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb114531e1e2e564ab1b89c609a8de7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthSystem
+  healthBarPrefab: {fileID: 12557455549121897, guid: aa82196a7a062d34fa1bda33923454c7, type: 3}
+  offset: {x: 0, y: 1, z: 0}
