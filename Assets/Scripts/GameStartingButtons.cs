@@ -6,7 +6,7 @@ using UnityEditor;
 
 public class GameOverButtons : MonoBehaviour
 {
-    public void PlayAgainButton()
+    public void PlayButton()
     {
         SceneManager.LoadScene("MainScene");
     }
